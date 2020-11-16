@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "926600529006",
+    "firebase_url": "https://delivery-49e8c.firebaseio.com",
+    "project_id": "delivery-49e8c",
+    "storage_bucket": "delivery-49e8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926600529006:android:2bb1a872ffe7378755927f",
+        "android_client_info": {
+          "package_name": "org.nativescript.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926600529006-lfg9spfemptlcokd21ml6eap3gftaa9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA81vdP3BQOcmZKg3qcojKpEhA75srD8l4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926600529006-lfg9spfemptlcokd21ml6eap3gftaa9a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
