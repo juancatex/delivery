@@ -1,12 +1,12 @@
 <template>
     <StackLayout  backgroundColor="white"    width="100%"> 
-          <Label verticalAlignment="center" textAlignment="center" margin="20px" fontWeight="bold" :text="datas.name" textWrap="true"  fontSize="15px"/>
+          <Label verticalAlignment="center" textAlignment="center" margin="20px" fontWeight="bold" :text="datas.name" textWrap="true"  fontSize="20px"/>
             <StackLayout width="100%" class="lineBreak" marginBottom="5"/> 
             
               <GridLayout v-if="datas.stock>0"  columns="*,2*" rows="auto" paddingLeft="15" paddingRight="15" >
                       <Label  color="black" textAlignment="center"
                        verticalAlignment="center" fontSize="16"  col="0" row="0"   text="Cantidad : "  ></Label>  
-                      <ListPicker col="1" row="0"  :items="cantidades"  
+                      <ListPicker col="1" row="0"  :items="cantidades" height="20%" 
                         @selectedIndexChange="selectedIndexChanged" />
                   </GridLayout>
                  
@@ -29,7 +29,7 @@
  
                  <GridLayout   columns="*,*" rows="auto"  >
                       <Label v-if="datas.stock>0" backgroundColor="rgba(83, 186, 130, 0.9)" width="100%"  margin="2"  color="white" textAlignment="center"
-                       verticalAlignment="center" fontSize="16" padding="8" col="0" row="0"   text="Agregar" @tap="$modal.close()"></Label>  
+                       verticalAlignment="center" fontSize="16" padding="8" col="0" row="0"   text="Agregar" @tap="registrar()"></Label>  
                       
                        <Label backgroundColor="tomato" width="100%"  margin="2"  color="white" textAlignment="center"
                        verticalAlignment="center" fontSize="16" padding="8" col="1" row="0"   text="Cancelar" @tap="$modal.close()"></Label> 
@@ -39,7 +39,7 @@
 
 <script> 
     export default {
-        props: ["datas"] ,
+        props: ["datas","grupo"] ,
          data() {
             return {
                 cantidades:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
@@ -48,13 +48,12 @@
               };
         },
         methods:{
-             selectedIndexChanged(eve) { 
+             selectedIndexChanged(eve) {  
                 this.cant=eve.value+1;
-                this.subtotal=this.roundTo(this.datas.price*this.cant, 2)
-            },
-            roundTo(value, places) {
-                var power = java.lang.Math.pow(10, places);
-                return java.lang.Math.round(value * power) / power;
+                this.subtotal=this.$control.roundTo(this.datas.price*this.cant, 2)
+            } ,
+            registrar(){
+              this.$control.cart.push({grupo:this.grupo,value:this.datas,cant:this.cant,total:this.subtotal});
             }
         }
     };

@@ -3,6 +3,14 @@
         <ActionBar  backgroundColor="#53ba82">
           <NavigationButton text="Atraz" color="white" android.systemIcon="ic_menu_back" @tap="back()"/>
             <Label fontSize="20" :text="datain.name"/>
+            <ActionItem ios.position="right">
+                 <GridLayout v-if="$control.cart.length>0" class="bounceIn1" width="65" rows="*" columns="*" horizontalAlignment="center" verticalAlignment="middle" @tap="toCart()">
+                     <Label class="info fas" row="0" fontSize="25" text.decode="&#xf217; "
+                     horizontalAlignment="right" color="white" margin="5"> </Label> 
+                     <Label class="fas" row="0" fontSize="15" :text="cantcart" width="25" height="25" borderWidth="0.7" borderColor="white" textAlignment="center" marginTop="5" marginRight="6"
+                     horizontalAlignment="right" verticalAlignment="top" backgroundColor="red" borderRadius="100" color="white" padding="5"> </Label>
+                 </GridLayout>
+            </ActionItem>
         </ActionBar>
 
         <GridLayout rows="*,*,*,*" columns="*,*" width="100%" height="100%" padding="7" backgroundColor="rgba(83, 186, 130, 0.6)">
@@ -152,11 +160,21 @@ import producto_modal  from "./producto_modal";
                 group:'/'
               };
         },
+         computed: { 
+    cantcart: function () { 
+      console.log('cambioo')
+      return this.$control.cart.length
+    }
+  },
      methods: { 
+         toCart(){
+             console.log(this.$control.cart)
+         },
            to(datainn){
               this.$showModal(producto_modal, {
                     props: { 
-                         datas:datainn
+                         datas:datainn,
+                         grupo:this.group
                     }
                 }).then((data)=>{
                    
@@ -186,10 +204,10 @@ import producto_modal  from "./producto_modal";
      
     setTimeout(() => {  
           me.$firebase.addValueEventListener(me.onValueEvent, me.datain.path).then(
-            function(listenerWrapper) { 
-            me.$pathlistener = listenerWrapper.path; 
-            me.group=me.datain.path; 
-            me.$listeners = listenerWrapper.listeners;  
+            function(listenerWrapper) {  
+            me.group=me.datain.path;  
+            me.$control.setpathlistener(listenerWrapper.path); 
+            me.$control.setlisteners(listenerWrapper.listeners); 
             }
           );
     }, 1000);
